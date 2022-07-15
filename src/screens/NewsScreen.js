@@ -1,16 +1,10 @@
-import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View, FlatList, Animated } from 'react-native'
+import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
 
 const BackgroundImage = "https://img.lovepik.com/background/20211101/medium/lovepik-cool-technology-background-mobile-phone-wallpaper-image_400502897.jpg";
 
-const HEIGHT_IMG = 100;
-const ITEM_PADDING = 10;
-const ITEM_MARGIN_TOP = 20;
-const ITEM_SIZE = HEIGHT_IMG + ITEM_PADDING * 2 + ITEM_MARGIN_TOP;
-
 const NewsScreen = () => {
-  // const ScrollY = React.useRef(new Animated.Value(0)).current;
 
   const [data, setData] = useState([]);
   const [isLoading, setIsloading] = useState(true);
@@ -23,7 +17,7 @@ const NewsScreen = () => {
   }, [])
 
   getListNews = () => {
-    const urlApi = "https://jsonplaceholder.typicode.com/photos";
+    const urlApi = "https://jsonplaceholder.typicode.com/photos"; //đường dẫn API
     fetch(urlApi)
       .then((res) => res.json())
       .then((resJson) => { // request API
@@ -34,35 +28,18 @@ const NewsScreen = () => {
   }
   const renderItem = ({ item, index }) => {
 
-    // const scale = ScrollY.interpolate({
-    //   inputRange: [
-    //     -1, 0, ITEM_SIZE * index, ITEM_SIZE * (index + 2)
-    //   ],
-    //   outputRange: [
-    //     1, 1, 1, 0
-    //   ]
-    // })
-
     return (
-      <View >
-        {/* <Animated.TouchableOpacity style={[
-          {
-            transform: [{ scale }] 
-          }
-          styles.item,
-        ]}> */}
-        <Animated.TouchableOpacity style={styles.item}>
-          <Image
-            style={styles.image}
-            source={{ uri: item.url }}
-            resizeMode='contain'
-          />
-          <View style={styles.wrapText}>
-            <Text style={styles.fontSize} >{index + '. ' + item.title}</Text>
-            <Text style={styles.fontTime} >15:10, 15/07/2022</Text>
-          </View>
-        </Animated.TouchableOpacity>
-      </View>
+      <TouchableOpacity style={styles.item}>
+        <Image
+          style={styles.image}
+          source={{ uri: item.url }}
+          resizeMode='contain'
+        />
+        <View style={styles.wrapText}>
+          <Text style={styles.fontSize} >{index + '. ' + item.title}</Text>
+          <Text style={styles.fontTime} >15:10, 15/07/2022</Text>
+        </View>
+      </TouchableOpacity >
     )
   }
 
@@ -80,15 +57,10 @@ const NewsScreen = () => {
       <Header name="Tin tức" />
       {
         isLoading ? <ActivityIndicator /> : (
-          <Animated.FlatList
+          <FlatList
             data={data}
             renderItem={renderItem}
             keyExtractor={item => `key-${item.id}`}
-
-          // onScroll={Animated.event(
-          //   [{ nativeEvent: { contentOffSet: { y: ScrollY } } }],
-          //   { useNativeDriver: true }
-          // )}
           />
         )
       }
@@ -103,7 +75,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   item: {
-    marginTop: ITEM_MARGIN_TOP,
+    marginTop: 20,
     marginHorizontal: 20,
     flexDirection: 'row',
     borderRadius: 15,
@@ -115,11 +87,11 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 10,
     shadowRadius: 20,
-    padding: ITEM_PADDING
+    padding: 10
   },
   image: {
     width: 100,
-    height: HEIGHT_IMG,
+    height: 100,
     borderTopLeftRadius: 15,
     borderBottomLeftRadius: 15,
 
@@ -142,3 +114,4 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
   }
 })
+
