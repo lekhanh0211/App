@@ -17,32 +17,29 @@ export default function CategoryItem({ name, imageUrl, active, handlePress }) {
 }
 
 const styles = StyleSheet.create({
+
     container: {
-        width: 70,
-        height: 100,
-        borderRadius: 50,
+        width: 75,
+        height: 80,
+        borderRadius: 10,
         backgroundColor: "#FFF",
-        // backgroundColor: "rgb(241,186,87)",
         marginVertical: 15,
         marginRight: 20,
-        marginLeft: 2,
-        shadowColor: '#000',
-        shadowOffset: { width: 5, height: 5 },
-        elevation: 5,
-        shadowOpacity: 0.1,
         alignItems: 'center',
         justifyContent: 'center'
 
     },
     textCate: {
+        flex: 1,
         color: "#000",
         fontWeight: 'bold',
     },
     img: {
-        width: 40,
+        width: 30,
         height: 30,
     },
     imgContainer: {
+        marginTop: 5,
         width: 50,
         height: 50,
         backgroundColor: '#FFF',

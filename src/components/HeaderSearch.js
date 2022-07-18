@@ -2,7 +2,23 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import React from 'react'
 import Icons from 'react-native-vector-icons/Feather';
 import { WIDTH } from '../utils/Dimensions';
-const HeaderSearch = () => {
+import CartScreen from '../screens/CartScreen'
+import SearchScreen from '../screens/SearchScreen'
+
+import { createStackNavigator } from '@react-navigation/stack';
+const Stack = createStackNavigator();
+
+const HeaderS = () => {
+    return (
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="HeaderSearch" component={HeaderSearch} />
+            <Stack.Screen name="Cart" component={CartScreen} />
+            <Stack.Screen name="Search" component={SearchScreen} />
+        </Stack.Navigator>
+    )
+}
+
+const HeaderSearch = ({ navigation }) => {
     return (
         <View style={styles.header}>
             <View style={{ flexDirection: 'column', justifyContent: 'center' }}>
@@ -13,14 +29,18 @@ const HeaderSearch = () => {
                 <TextInput placeholder='Search' />
                 <Icons color="#FFF" size={22} name='search' />
             </View>
-            <TouchableOpacity onPress={() => navigation.navigate('CartScreen')}>
+            <TouchableOpacity onPress={() => navigation.navigate("Cart")}>
                 <Icons name="shopping-cart" color="#FFF" size={22} />
             </TouchableOpacity>
         </View>
     )
 }
 
-export default HeaderSearch
+
+
+
+
+export default HeaderS
 
 const styles = StyleSheet.create({
     header: {

@@ -23,7 +23,7 @@ const BannerSlider = () => {
             <View style={styles.wrap}>
                 <ScrollView
                     onScroll={({ nativeEvent }) => onchange(nativeEvent)}
-                    showHorizontalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
                     pagingEnabled
                     horizontal
                     style={styles.wrap}>
@@ -54,7 +54,6 @@ export default BannerSlider
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         alignItems: 'center',
     },
     wrap: {

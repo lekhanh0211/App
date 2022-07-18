@@ -27,7 +27,7 @@ const TabNavigator = () => {
                 borderTopEndRadius: 10,
                 borderTopStartRadius: 10,
                 backgroundColor: '#154a8f',
-                
+
             }
         }}>
             {TabArr.map((item, index) => {

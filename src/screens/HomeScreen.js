@@ -1,46 +1,69 @@
-import { Image, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { WIDTH, HEIGHT } from '../utils/Dimensions'
 import BannerSlider from '../components/BannerSlider'
-import HeaderSearch from '../components/HeaderSearch'
 import { FlatList } from 'react-native-gesture-handler'
 import CategoryItem from '../components/CategoryItem'
+import HeaderS from '../components/HeaderSearch'
+
 
 const dataCate = [
   {
     id: 1,
-    name: "Burger",
+    name: "Sach giáo khoa",
     imageUrl: require("../assets/img/Activity.png")
   },
   {
     id: 2,
-    name: "Cake",
+    name: "Sách tham khảo",
     imageUrl: require("../assets/img/BookCategories.png")
   },
   {
     id: 3,
-    name: "Pasta",
+    name: "Sách thiếu nhi",
     imageUrl: require("../assets/img/Children.png")
   },
   {
     id: 4,
-    name: "Smoothies",
+    name: "Sách văn học",
     imageUrl: require("../assets/img/TamLy.png")
   },
   {
     id: 5,
-    name: "Steak",
+    name: "Kiến thức - khoa học",
     imageUrl: require("../assets/img/Test.png")
   },
   {
     id: 6,
-    name: "Pizza",
+    name: "Đời sống - Tâm lý",
     imageUrl: require("../assets/img/VanHoc.png")
+  },
+  {
+    id: 7,
+    name: "Sách giáo viên",
+    imageUrl: require("../assets/img/BookCategories.png")
+  },
+  {
+    id: 8,
+    name: "Sách ngoại ngữ",
+    imageUrl: require("../assets/img/BookCategories.png")
+  },
+  {
+    id: 9,
+    name: "Sách kinh tế",
+    imageUrl: require("../assets/img/BookCategories.png")
+  },
+  {
+    id: 10,
+    name: "Sách chính trị",
+    imageUrl: require("../assets/img/BookCategories.png")
   }
 ]
 
+
+
 const HomeScreen = ({ navigation }) => {
-  const [term, setTerm] = useState("Burger")
+  const [term, setTerm] = useState("Sách văn học")
 
   const renderItem = ({ item, index }) => {
     return <CategoryItem
@@ -52,19 +75,20 @@ const HomeScreen = ({ navigation }) => {
   }
   return (
     <View style={styles.container}>
+      <HeaderS />
+
       <ScrollView>
-        <StatusBar backgroundColor="#154a8f" barStyle='light-content' />
-        <HeaderSearch />
         <BannerSlider />
+        <StatusBar backgroundColor="#154a8f" barStyle='light-content' />
+
         <View style={styles.catContainer}>
           <FlatList style={styles.category}
+            numColumns={dataCate.length / 2}
             data={dataCate}
             renderItem={renderItem}
-            horizontal
             showsHorizontalScrollIndicator={false} //ẩn thanh trượt ngang
             keyExtractor={(category) => category.name}
           />
-         
         </View>
       </ScrollView>
     </View>
@@ -76,7 +100,7 @@ export default HomeScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#154a8f'
+    backgroundColor: "#FFF"
   },
   header: {
     width: WIDTH,
@@ -114,5 +138,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 15,
     marginHorizontal: 20
   },
+
 
 })
