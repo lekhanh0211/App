@@ -2,21 +2,8 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import React from 'react'
 import Icons from 'react-native-vector-icons/Feather';
 import { WIDTH } from '../utils/Dimensions';
-import CartScreen from '../screens/CartScreen'
-import SearchScreen from '../screens/SearchScreen'
 
-import { createStackNavigator } from '@react-navigation/stack';
-const Stack = createStackNavigator();
 
-const HeaderS = () => {
-    return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="HeaderSearch" component={HeaderSearch} />
-            <Stack.Screen name="Cart" component={CartScreen} />
-            <Stack.Screen name="Search" component={SearchScreen} />
-        </Stack.Navigator>
-    )
-}
 
 const HeaderSearch = ({ navigation }) => {
     return (
@@ -40,7 +27,7 @@ const HeaderSearch = ({ navigation }) => {
 
 
 
-export default HeaderS
+export default HeaderSearch
 
 const styles = StyleSheet.create({
     header: {

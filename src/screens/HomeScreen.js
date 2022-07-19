@@ -4,8 +4,8 @@ import { WIDTH, HEIGHT } from '../utils/Dimensions'
 import BannerSlider from '../components/BannerSlider'
 import { FlatList } from 'react-native-gesture-handler'
 import CategoryItem from '../components/CategoryItem'
-import HeaderS from '../components/HeaderSearch'
-
+import HeaderSearch from '../components/HeaderSearch'
+import COLORS from '../common/colors'
 
 const dataCate = [
   {
@@ -75,16 +75,16 @@ const HomeScreen = ({ navigation }) => {
   }
   return (
     <View style={styles.container}>
-      <HeaderS />
+      <HeaderSearch />
 
       <ScrollView>
         <BannerSlider />
-        <StatusBar backgroundColor="#154a8f" barStyle='light-content' />
+        <StatusBar backgroundColor={COLORS.color} barStyle='light-content' />
 
         <View style={styles.catContainer}>
           <FlatList style={styles.category}
-            numColumns={dataCate.length / 2}
             data={dataCate}
+            horizontal
             renderItem={renderItem}
             showsHorizontalScrollIndicator={false} //ẩn thanh trượt ngang
             keyExtractor={(category) => category.name}
