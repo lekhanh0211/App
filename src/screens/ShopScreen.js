@@ -17,7 +17,6 @@ const ShopScreen = ({ navigation }) => {
   const ListCategories = () => {
     return (
       <ScrollView
-        numColumns={5}
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.categoriesListContainer}>

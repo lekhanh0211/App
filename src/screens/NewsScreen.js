@@ -17,7 +17,8 @@ const NewsScreen = () => {
   }, [])
 
   getListNews = () => {
-    const urlApi = "https://jsonplaceholder.typicode.com/photos"; //đường dẫn API
+    // const urlApi = "https://jsonplaceholder.typicode.com/photos"; //đường dẫn API
+    const urlApi = "http://apinewbook.vtechedu.vn/api/danhmuc"; //đường dẫn API
     fetch(urlApi)
       .then((res) => res.json())
       .then((resJson) => { // request API
@@ -32,12 +33,13 @@ const NewsScreen = () => {
       <TouchableOpacity style={styles.item}>
         <Image
           style={styles.image}
-          source={{ uri: item.url }}
+          source={{ uri: item.UrlHinh }}
           resizeMode='contain'
         />
         <View style={styles.wrapText}>
-          <Text style={styles.fontSize} >{index + '. ' + item.title}</Text>
-          <Text style={styles.fontTime} >15:10, 15/07/2022</Text>
+          <Text style={styles.fontSize} >{index + '. ' + item.TieuDe}</Text>
+          <Text style={styles.fontTime} >{item.NguoiDang}</Text>
+          <Text style={styles.fontTime} >{item.NgayTao}</Text>
         </View>
       </TouchableOpacity >
     )
@@ -45,22 +47,18 @@ const NewsScreen = () => {
 
   return (
     <View style={styles.container}>
-
-
       <Image // set bgc cho nền
         source={{ uri: BackgroundImage }}
         style={StyleSheet.absoluteFill}
         blurRadius={10}
       />
-
-
       <Header name="Tin tức" />
       {
         isLoading ? <ActivityIndicator /> : (
           <FlatList
             data={data}
             renderItem={renderItem}
-            keyExtractor={item => `key-${item.id}`}
+            keyExtractor={item => `key-${item.Id}`}
           />
         )
       }
