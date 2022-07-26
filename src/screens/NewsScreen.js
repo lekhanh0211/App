@@ -1,14 +1,20 @@
 import { ActivityIndicator, Image, StyleSheet, Text, TouchableOpacity, View, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header'
-
+import news from '../api/news';
+import IMAGES from '../common/images'
 const BackgroundImage = "https://img.lovepik.com/background/20211101/medium/lovepik-cool-technology-background-mobile-phone-wallpaper-image_400502897.jpg";
+
+
 
 const NewsScreen = () => {
 
-  const [data, setData] = useState([]);
-  const [isLoading, setIsloading] = useState(true);
 
+  const [data, setData] = useState();
+  const [isLoading, setIsloading] = useState(true);
+  // const request = news.get('/api/bantin/list?sSearch=&index=1&size=10', { sSearch }, { index }, { size }).then((result) => {
+  //   setData(result.data);
+  // })
 
   useEffect(() => {
     getListNews(); // tên request
@@ -16,30 +22,35 @@ const NewsScreen = () => {
     }
   }, [])
 
-  getListNews = () => {
-    // const urlApi = "https://jsonplaceholder.typicode.com/photos"; //đường dẫn API
-    const urlApi = "http://apinewbook.vtechedu.vn/api/danhmuc"; //đường dẫn API
+  const getListNews = () => {
+    const urlApi = "http://apinewbook.vtechedu.vn/api/bantin/list?sSearch=&index=1&size=10"; //đường dẫn API
+    // const urlApi = "http://apinewbook.vtechedu.vn/api/banner"; //đường dẫn API
+
+
     fetch(urlApi)
       .then((res) => res.json())
       .then((resJson) => { // request API
-        setData(resJson)
+        setData(JSON.stringify(resJson))
+
       }).catch((error) => {
         console.log("Request API error", error);
       }).finally(() => setIsloading(false))
   }
-  const renderItem = ({ item, index }) => {
 
+
+
+  const render = ({ item, index }) => {
     return (
       <TouchableOpacity style={styles.item}>
         <Image
           style={styles.image}
-          source={{ uri: item.UrlHinh }}
+          source={{ uri: IMAGES.URLIMG + item.UrlHinhAnh }}
           resizeMode='contain'
         />
         <View style={styles.wrapText}>
-          <Text style={styles.fontSize} >{index + '. ' + item.TieuDe}</Text>
+          <Text style={styles.fontSize} >{index + '. ' + item.TomTat}</Text>
           <Text style={styles.fontTime} >{item.NguoiDang}</Text>
-          <Text style={styles.fontTime} >{item.NgayTao}</Text>
+          <Text style={styles.fontTime} >{item.NgayDang}</Text>
         </View>
       </TouchableOpacity >
     )
@@ -47,21 +58,23 @@ const NewsScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Image // set bgc cho nền
+      <Image // set bgc
         source={{ uri: BackgroundImage }}
         style={StyleSheet.absoluteFill}
         blurRadius={10}
       />
       <Header name="Tin tức" />
+
       {
         isLoading ? <ActivityIndicator /> : (
           <FlatList
             data={data}
-            renderItem={renderItem}
-            keyExtractor={item => `key-${item.Id}`}
+            renderItem={render}
+            keyExtractor={item => `key-${item.url}`}
           />
         )
       }
+
     </View>
   )
 }
